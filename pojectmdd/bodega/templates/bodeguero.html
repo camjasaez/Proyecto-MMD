@@ -1,0 +1,27 @@
+{% extends 'index.html' %} {% block content_block %}
+<div class="container-sm">
+  <main
+    class="d-flex p-2 flex-column justify-content-center align-items-center align-self-center"
+  >
+    <h1>Perfil Bodeguero</h1>
+    <!-- <form action="/bodeguero/" method="POST">
+      {% csrf_token %} {{formulario}}
+      <button type="submit" class="btn btn-primary">Enviar</button>
+    </form> -->
+
+    <section class="card" style="width: 18rem">
+      <table>
+        <tr>
+          <th>Nombre:</th>
+        </tr>
+        {% for b in bodeguero %}
+        <tr>
+          <td>{{b.nombre}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </section>
+  </main>
+</div>
+
+{% endblock %}

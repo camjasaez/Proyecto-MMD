@@ -1,0 +1,33 @@
+{% extends 'index.html' %} {% block content_block %}
+<div class="container-sm">
+  <section class="d-flex">
+    <h1 class="center">Delegaciones</h1>
+    <button class="m-2 btn btn-primary btn-xs" type="button">
+      Añadir delegacion
+    </button>
+  </section>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Cantidad Deportistas</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for d in delegaciones %}
+      <tr>
+        <th scope="row">{{d.id}}</th>
+        <td>{{d.nombre}}</td>
+        <td>{{delegaciones|length}}</td>
+        <td>
+          <button class="btn btn-warning">Editar</button>
+          <button class="btn btn-danger">Eliminar</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

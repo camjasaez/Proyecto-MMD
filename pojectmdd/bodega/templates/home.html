@@ -1,0 +1,23 @@
+{% extends 'index.html' %} {% block content_block %}
+<div class="container-sm">
+  <h1 class="center">Home</h1>
+  <main
+    class="d-flex p-2 justify-content-center align-items-center align-self-center"
+  >
+    <!-- <form action="/bodeguero/" method="POST">
+        {% csrf_token %} {{formulario}}
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form> -->
+
+    <section class="card m-5 d-flex align-items-center" style="width: 18rem">
+      <a class="nav-link" href="/bodegas"><h2>Bodegas</h2></a>
+    </section>
+    <section class="card m-5 d-flex align-items-center" style="width: 18rem">
+      <a class="nav-link" href="/delegaciones"><h2>Delegaciones</h2></a>
+    </section>
+    <section class="card m-5 d-flex align-items-center" style="width: 18rem">
+      <a class="nav-link" href="/elementos"><h2>Elementos</h2></a>
+    </section>
+  </main>
+</div>
+{% endblock %}

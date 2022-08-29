@@ -1,0 +1,60 @@
+{% extends 'index.html' %} {% block content_block %}
+<div class="container-sm">
+  <section class="d-flex">
+    <h1 class="center">Bodegas</h1>
+    <button class="m-2 btn btn-primary btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Añadir bodega
+    </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/bodegas/" method="POST" class="d-flex flex-column">
+              {% csrf_token %} 
+              {{formulario}}
+              <button type="submit" class="btn btn-primary">Enviar</button>
+            </form> 
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for b in bodegas %}
+      <tr>
+        <th scope="row">{{b.id}}</th>
+        <td>{{b.nombre}}</td>
+        <td>{{b.descripcion}}</td>
+        <td>{{b.estado}}</td>
+        <td style="text-align: center;"><a href="{% url 'update_bodega' bodegas=b.id %}">Update</a></td>
+        <td style="text-align: center; color: crimson;"><a style="color: crimson;" href="{% url 'delete_bodega' bodegas=b.id %}">Delete</a></td>
+        <td>
+          <button class="btn btn-info">
+            <a class="nav-link" href="/bodegas/{{b.id}}"><h2>Detalle</h2></a>
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

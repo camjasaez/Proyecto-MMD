@@ -1,0 +1,35 @@
+{% extends 'index.html' %} {% block content_block %}
+<div class="container-sm">
+  <section class="d-flex">
+    <h1 class="center">Elementos</h1>
+    <button class="m-2 btn btn-primary btn-xs" type="button">
+      Añadir elementos
+    </button>
+  </section>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Tipo</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for e in elementos %}
+      <tr>
+        <th scope="row">{{e.id}}</th>
+        <td>{{e.nombre}}</td>
+        <td>{{e.descripcion}}</td>
+        <td>{{e.tipo}}</td>
+        <td>
+          <button class="btn btn-warning">Editar</button>
+          <button class="btn btn-danger">Eliminar</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
