@@ -8,9 +8,15 @@ class Universidad(models.Model):
     direccion = models.CharField(max_length=255)
     categoria = models.CharField(max_length=255)
 
+    def __str__(self):
+        return (self.nombre)
+
 
 class Bodeguero(models.Model):
     nombre = models.CharField(max_length=50)
+
+    def __str__(self):
+        return (self.nombre)
 
 
 class Elemento(models.Model):
@@ -18,14 +24,23 @@ class Elemento(models.Model):
     descripcion = models.CharField(max_length=255)
     tipo = models.CharField(max_length=255)
 
+    def __str__(self):
+        return (self.nombre)
+
 
 class Ciudad(models.Model):
     nombre = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return (self.nombre)
 
 
 class Region(models.Model):
     nombre = models.CharField(max_length=50)
     ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return (self.nombre)
 
 
 class Delegacion(models.Model):
@@ -33,12 +48,18 @@ class Delegacion(models.Model):
     ciudad = models.ForeignKey(Ciudad, on_delete=models.CASCADE)
     universidad = models.ForeignKey(Universidad, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return (self.nombre)
+
 
 class Deportista(models.Model):
     nombre = models.CharField(max_length=50)
     fecha_nacimiento = models.CharField(max_length=255)
     delegacion = models.ForeignKey(Delegacion, on_delete=models.CASCADE)
     universidad = models.ForeignKey(Universidad, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return (self.nombre)
 
 
 class Bodega(models.Model):
@@ -50,8 +71,12 @@ class Bodega(models.Model):
     elementos = models.ManyToManyField(
         Elemento, through='Tiene', through_fields=('bodega', 'elemento'))
 
+    def __str__(self):
+        return (self.nombre)
+
 
 class Tiene(models.Model):
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE)
-    elemento = models.ForeignKey(Elemento, on_delete=models.CASCADE)
+    elemento = models.ForeignKey(
+        Elemento, on_delete=models.CASCADE)
     delegacion = models.ForeignKey(Delegacion, on_delete=models.CASCADE)

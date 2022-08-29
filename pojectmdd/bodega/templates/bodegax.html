@@ -1,0 +1,37 @@
+{% extends 'index.html' %} {% block content_block %}
+<div class="container-sm">
+  <h1>Bodega n: {{bodega.id}}</h1>
+
+  <!-- For para los elementos que tiene la bodega -->
+  {% for t in tiene %} {% if t.bodega_id is bodega.id %}
+  <div>
+    {% for d in delegacion %}
+    <div>
+      {% if d.id is t.delegacion_id %}
+      <div>
+        Delegacion: {{d.nombre}} {% for e in elementos %}
+        <div>
+          {% if e.id is t.elemento_id %}
+          <div>{{e.nombre}}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %} {% endfor %}
+</div>
+{% endblock %}
+
+<!-- respaldo:
+{% for t in tiene %} {% if t.bodega_id is bodega.id %}
+  <p>Elementos: {{t.elemento_id}}</p>
+  <p>Delegacion: {{t.delegacion_id}}</p>
+
+{% endif %} {% endfor %} -->
+
+{% comment %} {% if e.id is t.elemento_id%}
+<p>{{e.nombre}}</p>
+{% endif %} {% endcomment %}

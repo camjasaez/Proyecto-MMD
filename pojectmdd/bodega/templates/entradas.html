@@ -1,0 +1,10 @@
+{% extends 'index.html' %} {% block content_block %}
+<div class="container-sm">
+  <h1>Entradas de elementos</h1>
+
+  <form action="/entradas/" method="POST">
+    {% csrf_token %} {{form}}
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+</div>
+{% endblock %}
