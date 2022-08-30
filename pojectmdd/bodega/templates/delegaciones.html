@@ -2,17 +2,24 @@
 <div class="container-sm">
   <section class="d-flex">
     <h1 class="center">Delegaciones</h1>
-    <button class="m-2 btn btn-primary btn-xs" type="button">
-      Añadir delegacion
-    </button>
   </section>
+  <div class="border rounded" style="width:500px; margin: 10px; padding: 30px;">
+    <h3> Guardar nueva delegacion </h3>
+    <form action="/delegaciones/" method="POST">
+      {% csrf_token %}
+      {{formulario}}
+      <button class="btn btn-primary mt-3 w-100" type="submit">Guardar</button>
+  </form>
+  </div>
   <table class="table">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nombre</th>
-        <th scope="col">Cantidad Deportistas</th>
-        <th scope="col"></th>
+        <th scope="col">Ciudad</th>
+        <th scope="col">Universidad</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
       </tr>
     </thead>
     <tbody>
@@ -20,10 +27,11 @@
       <tr>
         <th scope="row">{{d.id}}</th>
         <td>{{d.nombre}}</td>
-        <td>{{delegaciones|length}}</td>
+        <td>{{d.ciudad}}</td>
+        <td>{{d.universidad}}</td>
         <td>
-          <button class="btn btn-warning">Editar</button>
-          <button class="btn btn-danger">Eliminar</button>
+          <td style="text-align: center;"><a href="{% url 'update_delegacion' delegaciones=d.id %}">Editar</a></td>
+          <td style="text-align: center; color: crimson;"><a style="color: crimson;" href="{% url 'delete_delegacion' delegaciones=d.id %}">Eliminar</i></a></td>
         </td>
       </tr>
       {% endfor %}

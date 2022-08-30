@@ -35,3 +35,8 @@ class TieneForm(forms.ModelForm):
                 'placeholder': 'Delegacion...'
             }),
         }
+
+class DelegacionForm(forms.ModelForm):
+    class Meta:
+        model = Delegacion
+        fields = ["nombre", "ciudad", "universidad"]

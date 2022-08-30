@@ -1,7 +1,7 @@
 from multiprocessing import context
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .forms import BodegueroForm, BodegaForm, TieneForm
+from .forms import BodegueroForm, BodegaForm, TieneForm, DelegacionForm
 from .models import Bodeguero, Elemento, Bodega, Delegacion, Tiene
 # from .forms import BodegaForm, DelegacionForm, UniversidadForm, BodegueroForm, ElementoForm, CiudadForm, RegionForm, DeportistaForm, TieneForm
 
@@ -63,9 +63,30 @@ def bodegas_id(request, id):
 
 
 def delegaciones(request):
+    if request.method == "POST":
+        form = DelegacionForm(request.POST)
+        if form.is_valid():
+            form.save()
     delegaciones = Delegacion.objects.all()
-    return render(request, 'delegaciones.html', {'delegaciones': delegaciones})
+    form = DelegacionForm()
+    return render(request, 'delegaciones.html', {'delegaciones': delegaciones, 'formulario': form})
 
+def delete_delegacion(request, delegaciones):
+    if Delegacion.objects.filter(id=delegaciones).exists():
+        Delegacion.objects.filter(id=delegaciones).delete()
+        return redirect('/delegaciones/')
+    return redirect('/delegaciones/')
+
+
+def update_delegacion(request, delegaciones):
+    delegaciones = Delegacion.objects.get(id=delegaciones)
+    update_formulario = DelegacionForm(instance=delegaciones)
+    if request.method == "POST":
+        formulario_entrante = DelegacionForm(request.POST, instance=delegaciones)
+        if formulario_entrante.is_valid():
+            formulario_entrante.save()
+            return redirect('/delegaciones/')
+    return render(request, "delegacion.html", {"formulario": update_formulario, "delegaciones": delegaciones})
 
 def entradas(request):
     delegaciones = Delegacion.objects.all()
