@@ -6,13 +6,11 @@
       Editar bodega
     </button>
   </section>
-  <body>
       <form action="{% url 'update_bodega' bodegas=bodegas.id %}" method="POST">
         {% csrf_token %}
         {{formulario}}
         <button class="btn btn-primary mt-3 w-100" type="submit">Editar</button>
     </form>
     </div>
-</body>
 </div>
 {% endblock %}
