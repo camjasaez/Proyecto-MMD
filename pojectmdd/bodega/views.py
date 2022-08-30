@@ -1,7 +1,7 @@
 from multiprocessing import context
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .forms import BodegueroForm, BodegaForm, TieneForm, DelegacionForm
+from .forms import BodegueroForm, BodegaForm, TieneForm, DelegacionForm, ElementoForm
 from .models import Bodeguero, Elemento, Bodega, Delegacion, Tiene
 # from .forms import BodegaForm, DelegacionForm, UniversidadForm, BodegueroForm, ElementoForm, CiudadForm, RegionForm, DeportistaForm, TieneForm
 
@@ -34,6 +34,15 @@ def bodegas(request):
     bodegas = Bodega.objects.all()
     form = BodegaForm()
     return render(request, 'bodegas.html', {'bodegas': bodegas, 'formulario': form})
+
+def elementos(request):
+    if request.method == "POST":
+        form = ElementoForm(request.POST)
+        if form.is_valid():
+            form.save()
+    elementos = Elemento.objects.all()
+    form = ElementoForm()
+    return render(request, 'elementos.html', {'elementos': elementos, 'formulario': form})
 
 
 def delete_bodega(request, bodegas):
