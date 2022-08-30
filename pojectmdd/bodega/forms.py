@@ -14,6 +14,12 @@ class BodegaForm(forms.ModelForm):
         fields = ["nombre", "direccion", "descripcion", "estado", "bodeguero"]
 
 
+class ElementoForm(forms.ModelForm):
+    class Meta:
+        model = Elemento
+        fields = ["nombre", "descripcion", "tipo"]
+
+
 class TieneForm(forms.ModelForm):
     class Meta:
         model = Tiene

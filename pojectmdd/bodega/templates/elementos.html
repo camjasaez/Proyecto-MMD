@@ -2,9 +2,30 @@
 <div class="container-sm">
   <section class="d-flex">
     <h1 class="center">Elementos</h1>
-    <button class="m-2 btn btn-primary btn-xs" type="button">
-      Añadir elementos
+    <button class="m-2 btn btn-primary btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Añadir Elementos
     </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Añadir Elementos</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"&times;></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/elementos/" method="POST" class="d-flex flex-column">
+              {% csrf_token %}
+              {{formulario}}
+              <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
   <table class="table">
     <thead>
