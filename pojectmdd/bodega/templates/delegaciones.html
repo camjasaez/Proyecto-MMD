@@ -3,13 +3,12 @@
   <section class="d-flex">
     <h1 class="center">Delegaciones</h1>
   </section>
-  <div class="border rounded" style="width:500px; margin: 10px; padding: 30px;">
-    <h3> Guardar nueva delegacion </h3>
+  <div class="border rounded" style="width: 500px; margin: 10px; padding: 30px">
+    <h3>Guardar nueva delegacion</h3>
     <form action="/delegaciones/" method="POST">
-      {% csrf_token %}
-      {{formulario}}
+      {% csrf_token %} {{formulario}}
       <button class="btn btn-primary mt-3 w-100" type="submit">Guardar</button>
-  </form>
+    </form>
   </div>
   <table class="table">
     <thead>
@@ -18,8 +17,8 @@
         <th scope="col">Nombre</th>
         <th scope="col">Ciudad</th>
         <th scope="col">Universidad</th>
-        <th scope="col">Editar</th>
-        <th scope="col">Eliminar</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -30,8 +29,20 @@
         <td>{{d.ciudad}}</td>
         <td>{{d.universidad}}</td>
         <td>
-          <td style="text-align: center;"><a href="{% url 'update_delegacion' delegaciones=d.id %}">Editar</a></td>
-          <td style="text-align: center; color: crimson;"><a style="color: crimson;" href="{% url 'delete_delegacion' delegaciones=d.id %}">Eliminar</i></a></td>
+          <button class="btn btn-warning">
+            <a
+              style="text-decoration: inherit; color: black"
+              href="{% url 'update_delegacion' delegaciones=d.id %}"
+              >Editar</a
+            >
+          </button>
+          <button class="btn btn-danger">
+            <a
+              style="text-decoration: inherit; color: black"
+              href="{% url 'delete_delegacion' delegaciones=d.id %}"
+              >Eliminar
+            </a>
+          </button>
         </td>
       </tr>
       {% endfor %}
