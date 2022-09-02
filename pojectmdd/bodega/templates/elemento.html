@@ -1,0 +1,12 @@
+{% extends 'index.html' %} {% block content_block %}
+<div class="container-sm">
+  <section class="d-flex">
+    <h1 class="center">Editar elemento {{elementos.id}}</h1>
+  </section>
+    <form action="{% url 'update_elementos' elementos=elementos.id %}" method="POST">
+      {% csrf_token %}
+      {{formulario}}
+      <button class="btn btn-primary mt-3 w-100" type="submit">Editar</button>
+  </form>
+  </div>
+  {% endblock %}

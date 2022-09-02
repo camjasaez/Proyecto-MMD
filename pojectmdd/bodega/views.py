@@ -35,6 +35,7 @@ def bodegas(request):
     form = BodegaForm()
     return render(request, 'bodegas.html', {'bodegas': bodegas, 'formulario': form})
 
+
 def elementos(request):
     if request.method == "POST":
         form = ElementoForm(request.POST)
@@ -43,6 +44,30 @@ def elementos(request):
     elementos = Elemento.objects.all()
     form = ElementoForm()
     return render(request, 'elementos.html', {'elementos': elementos, 'formulario': form})
+
+
+def elementos_id(request, id):
+    nombre = Elemento.objects.all()
+    descripcion = Elemento.objects.get(id=id)
+    tipo = Elemento.objects.all()
+    return render(request, 'elementos.html', {'nombre': nombre, 'descripcion': descripcion, 'tipo': tipo})
+
+def update_elemetos(request, elementos):
+    elementos = Elemento.objects.get(id=elementos)
+    update_formulario = ElementoForm(instance=elementos)
+    if request.method == "POST":
+        formulario_entrante = ElementoForm(request.POST, instance=elementos)
+        if formulario_entrante.is_valid():
+            formulario_entrante.save()
+            return redirect('/elementos/')
+    return render(request, "elemento.html", context={"formulario": update_formulario, "elementos": elementos})
+
+
+def delete_elementos(request, elementos):
+    if Elemento.objects.filter(id=elementos).exists():
+        Elemento.objects.filter(id=elementos).delete()
+        return redirect('/elementos/')
+    return redirect('/elementos/')
 
 
 def delete_bodega(request, bodegas):
@@ -80,6 +105,7 @@ def delegaciones(request):
     form = DelegacionForm()
     return render(request, 'delegaciones.html', {'delegaciones': delegaciones, 'formulario': form})
 
+
 def delete_delegacion(request, delegaciones):
     if Delegacion.objects.filter(id=delegaciones).exists():
         Delegacion.objects.filter(id=delegaciones).delete()
@@ -91,11 +117,13 @@ def update_delegacion(request, delegaciones):
     delegaciones = Delegacion.objects.get(id=delegaciones)
     update_formulario = DelegacionForm(instance=delegaciones)
     if request.method == "POST":
-        formulario_entrante = DelegacionForm(request.POST, instance=delegaciones)
+        formulario_entrante = DelegacionForm(
+            request.POST, instance=delegaciones)
         if formulario_entrante.is_valid():
             formulario_entrante.save()
             return redirect('/delegaciones/')
     return render(request, "delegacion.html", {"formulario": update_formulario, "delegaciones": delegaciones})
+
 
 def entradas(request):
     delegaciones = Delegacion.objects.all()

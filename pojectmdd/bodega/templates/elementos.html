@@ -45,7 +45,7 @@
         <td>{{e.descripcion}}</td>
         <td>{{e.tipo}}</td>
         <td>
-          <button class="btn btn-warning">Editar</button>
+          <button class="btn btn-warning"><a href="{% url 'update_elementos' elementos=e.id %}">Editar</button>
           <button class="btn btn-danger">Eliminar</button>
         </td>
       </tr>
