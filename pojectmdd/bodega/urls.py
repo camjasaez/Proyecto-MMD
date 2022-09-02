@@ -16,5 +16,7 @@ urlpatterns = [
     path('update_bodega/<int:bodegas>', views.update_bodega, name="update_bodega"),
     path('delete_bodega/<int:bodegas>', views.delete_bodega, name="delete_bodega"),
     path('update_delegacion/<int:delegaciones>', views.update_delegacion, name="update_delegacion"),
-    path('delete_delegacion/<int:delegaciones>', views.delete_delegacion, name="delete_delegacion")
+    path('delete_delegacion/<int:delegaciones>', views.delete_delegacion, name="delete_delegacion"),
+    path('delete_elementos/<int:elementos>', views.delete_elementos, name="delete_elementos"),
+
 ]

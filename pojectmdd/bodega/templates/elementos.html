@@ -39,14 +39,14 @@
     </thead>
     <tbody>
       {% for e in elementos %}
-      <tr>
+      <tr>|
         <th scope="row">{{e.id}}</th>
         <td>{{e.nombre}}</td>
         <td>{{e.descripcion}}</td>
         <td>{{e.tipo}}</td>
         <td>
           <button class="btn btn-warning">Editar</button>
-          <button class="btn btn-danger">Eliminar</button>
+          <button class="btn btn-danger"><a href="{% url 'delete_elementos' elementos=e.id %}">Eliminar</button>
         </td>
       </tr>
       {% endfor %}

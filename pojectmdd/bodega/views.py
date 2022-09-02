@@ -1,4 +1,5 @@
 from multiprocessing import context
+from tkinter import E
 from django.shortcuts import render
 from django.shortcuts import redirect
 from .forms import BodegueroForm, BodegaForm, TieneForm, DelegacionForm, ElementoForm
@@ -44,6 +45,27 @@ def elementos(request):
     form = ElementoForm()
     return render(request, 'elementos.html', {'elementos': elementos, 'formulario': form})
 
+def delete_elementos(request, elementos):
+    if Elemento.objects.filter(id=elementos).exists():
+        Elemento.objects.filter(id=elementos).delete()
+        return redirect('/elementos/')
+    return redirect('/elementos/')
+
+def update_elemetos(request, elementos):
+    elemento = Elemento.objects.get(id=elementos)
+    update_formulario = ElementoForm(instance=elementos)
+    if request.method == "POST":
+        formulario_entrante = ElementoForm(request.POST, instance=elementos)
+        if formulario_entrante.is_valid():
+            formulario_entrante.save()
+            return redirect('/elementos/')
+    return render(request, "elementos.html", context={"formulario": update_formulario, "elementos": elementos})
+
+def elementos_id(request, id):
+    nombre = Elemento.objects.all()
+    descripcion = Elemento.objects.get(id=id)
+    tipo = Elemento.objects.all()
+    return render(request, 'elementos.html', {'nombre': nombre, 'descripcion': descripcion, 'tipo': tipo})
 
 def delete_bodega(request, bodegas):
     if Bodega.objects.filter(id=bodegas).exists():
